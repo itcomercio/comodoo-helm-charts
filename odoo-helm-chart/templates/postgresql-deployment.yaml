@@ -1,0 +1,27 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ include "odoo-helm.fullname" . }}-comodoo-digital-db
+  labels:
+  {{- include "odoo-helm.labels" . | nindent 4 }}
+spec:
+  instances: 1
+  managed:
+    roles:
+    - comment: Usuario Odoo administrador de la instancia
+      createdb: true
+      createrole: false
+      ensure: present
+      login: true
+      name: odoo
+      passwordSecret:
+        name: {{ include "odoo-helm.fullname" .  }}-cluster-odoo
+      superuser: false
+  postgresql:
+    parameters:
+      max_worker_processes: "60"
+    pg_hba:
+    - host all all all md5
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 5Gi

@@ -1,0 +1,22 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: {{ include "odoo-helm.fullname" . }}-odoo-service-route
+  labels:
+  {{- include "odoo-helm.labels" . | nindent 4 }}
+spec:
+  hostnames:
+  - comodoo.digital
+  parentRefs:
+  - kind: Gateway
+    name: gateway-api
+    namespace: infra
+    port: 443
+  rules:
+  - backendRefs:
+    - name: odoo-service
+      port: 8069
+    matches:
+    - path:
+        type: PathPrefix
+        value: /

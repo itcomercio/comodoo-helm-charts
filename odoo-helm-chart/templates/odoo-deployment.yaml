@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "odoo-helm.fullname" . }}-odoo-instance
+  labels:
+    app: odoo
+  {{- include "odoo-helm.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odoo
+    {{- include "odoo-helm.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: odoo
+      {{- include "odoo-helm.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        # Bucles de control entrypoint
+        - name: MAX_DB_READY_RETRIES
+          value: {{ quote .Values.odooInstance.odoo.env.maxDbReadyRetries }}
+        - name: DB_READY_DELAY
+          value: {{ quote .Values.odooInstance.odoo.env.dbReadyDelay }}
+        - name: MAX_INIT_RETRIES
+          value: {{ quote .Values.odooInstance.odoo.env.maxInitRetries }}
+        - name: INIT_DELAY
+          value: {{ quote .Values.odooInstance.odoo.env.initDelay }}
+
+        # Secretos creados por el operador Cloud Native PostgreSQL (CNPG)
+        - name: PGHOST
+          valueFrom:
+            secretKeyRef:
+              key: host
+              name: comodoo-digital-db-app
+        - name: PGPORT
+          valueFrom:
+            secretKeyRef:
+              key: port
+              name: comodoo-digital-db-app
+        - name: PGUSER
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: {{ include "odoo-helm.fullname" . }}-cluster-odoo
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: {{ include "odoo-helm.fullname" . }}-cluster-odoo
+
+        # Secretos creados manualmente (argocd) para instancia Odoo
+        - name: ADMIN_USERNAME # El usuario admin inicial de Odoo
+          valueFrom:
+            secretKeyRef:
+              key: admin-user
+              name: {{ include "odoo-helm.fullname" . }}-odoo-app-credentials
+        - name: ADMIN_PASSWORD # Secreto del usuario admin inicial
+          valueFrom:
+            secretKeyRef:
+              key: admin-password
+              name: {{ include "odoo-helm.fullname" . }}-odoo-app-credentials
+        - name: MASTER_PASSWORD # Password de manipulación de la DB
+          valueFrom:
+            secretKeyRef:
+              key: master-password
+              name: {{ include "odoo-helm.fullname" . }}-odoo-app-credentials
+
+        # Parametrizacion Odoo
+        - name: ODOO_HTTP_INTERFACE
+          value: "0.0.0.0"
+        - name: HTTP_PORT
+          value: "8069"
+
+        # Container Image
+        name: odoo
+        image: {{ .Values.odooInstance.odoo.image.repository }}:{{ .Values.odooInstance.odoo.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.odooInstance.odoo.imagePullPolicy }}
+        ports:
+        - containerPort: 8069
+          name: http
+        - containerPort: 8071
+          name: longpolling
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "odoo-helm.fullname" . }}-odoo-service
+  labels:
+    app: odoo
+  {{- include "odoo-helm.labels" . | nindent 4 }}
+spec:
+  selector:
+    app: odoo
+    {{- include "odoo-helm.selectorLabels" . | nindent 4 }}
+  ports:
+  - name: http
+    port: 8069
+    protocol: TCP
+    targetPort: 8069
+  - name: longpolling
+    port: 8071
+    protocol: TCP
+    targetPort: 8071
+  type: ClusterIP
