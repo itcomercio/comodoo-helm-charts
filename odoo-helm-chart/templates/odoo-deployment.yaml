@@ -39,17 +39,17 @@ spec:
           valueFrom:
             secretKeyRef:
               key: port
-              name: comodoo-digital-db-app
+              name: {{ include "odoo-helm.fullname" . }}-comodoo-digital-db
         - name: PGUSER
           valueFrom:
             secretKeyRef:
               key: username
-              name: {{ include "odoo-helm.fullname" . }}-cluster-odoo
+              name: {{ include "odoo-helm.fullname" . }}-comodoo-digital-db
         - name: PGPASSWORD
           valueFrom:
             secretKeyRef:
               key: password
-              name: {{ include "odoo-helm.fullname" . }}-cluster-odoo
+              name: {{ include "odoo-helm.fullname" . }}-comodoo-digital-db
 
         # Secretos creados manualmente (argocd) para instancia Odoo
         - name: ADMIN_USERNAME # El usuario admin inicial de Odoo
