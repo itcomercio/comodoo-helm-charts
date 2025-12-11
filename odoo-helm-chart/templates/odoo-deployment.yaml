@@ -34,7 +34,7 @@ spec:
           valueFrom:
             secretKeyRef:
               key: host
-              name: comodoo-digital-db-app
+              name: {{ include "odoo-helm.fullname" . }}-comodoo-digital-db
         - name: PGPORT
           valueFrom:
             secretKeyRef:
