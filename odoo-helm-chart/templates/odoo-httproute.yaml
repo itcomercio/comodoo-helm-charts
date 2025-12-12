@@ -14,7 +14,7 @@ spec:
     port: 443
   rules:
   - backendRefs:
-    - name: odoo-service
+    - name: {{ include "odoo-helm.fullname" . }}-odoo-service
       port: 8069
     matches:
     - path:
