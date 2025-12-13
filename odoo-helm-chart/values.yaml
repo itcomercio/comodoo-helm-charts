@@ -20,4 +20,5 @@ odooInstance:
       tag: 19.0-1
     imagePullPolicy: Always
   
-odooDomainFilter: ""
+odooDomainFilter:
+  hostname: ""

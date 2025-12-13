@@ -3,12 +3,12 @@ entries:
   odoo-helm-chart:
   - apiVersion: v2
     appVersion: 19.0-1
-    created: "2025-12-13T09:59:51.842232447+01:00"
+    created: "2025-12-13T10:07:32.797344586+01:00"
     description: Odoo Helm chart for Kubernetes
-    digest: df730e5de33fb7f8b1d661ab0c06661e704271d0db622b1b8e85f443a6ac794f
+    digest: 848cf9701a0940da8b3d7f7d243c51e08e475a10188984e1ae906fa141710ce5
     name: odoo-helm-chart
     type: application
     urls:
     - odoo-helm-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2025-12-13T09:59:51.841915501+01:00"
+generated: "2025-12-13T10:07:32.796998082+01:00"
