@@ -1,11 +1,11 @@
 # Variables to be passed into your templates and default values.
 dbUserOdoo:
-  password: ""
   username: ""
+  password: ""
 
 odooAppCredentials:
-  adminPassword: ""
   adminUser: ""
+  adminPassword: ""
   masterPassword: ""
 
 odooInstance:
@@ -20,3 +20,4 @@ odooInstance:
       tag: 19.0-1
     imagePullPolicy: Always
   
+odooDomainFilter: ""

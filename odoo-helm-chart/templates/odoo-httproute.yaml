@@ -6,7 +6,7 @@ metadata:
   {{- include "odoo-helm.labels" . | nindent 4 }}
 spec:
   hostnames:
-  - comodoo.digital
+  - {{ required "Es necesario definir el dominio para desplegar el HTTPRoute" .Values.odooDomainFilter | quote  }}
   parentRefs:
   - kind: Gateway
     name: gateway-api
