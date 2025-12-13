@@ -14,7 +14,7 @@ odooInstance:
       dbReadyDelay: "2"
       maxDbReadyRetries: "30"
       initDelay: "2"
-      maxInitRetries: "1000"
+      maxInitRetries: "100"
     image:
       repository: localhost:30100/odoo/odoo
       tag: 19.0-1
