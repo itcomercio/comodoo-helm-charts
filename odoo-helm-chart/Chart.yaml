@@ -4,7 +4,7 @@ description: Odoo Helm chart for Kubernetes
 type: application
 
 # Chart version
-version: 0.1.0
+version: 0.2.0
 
 # Application (container image) version
 appVersion: "19.0-1"
