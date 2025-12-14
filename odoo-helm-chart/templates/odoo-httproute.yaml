@@ -6,7 +6,7 @@ metadata:
   {{- include "odoo-helm.labels" . | nindent 4 }}
 spec:
   hostnames:
-  - {{ qutote .Values.odooDomainFilter.hostname  }}
+  - {{ quote .Values.odooDomainFilter.hostname  }}
   parentRefs:
   - kind: Gateway
     name: gateway-api
