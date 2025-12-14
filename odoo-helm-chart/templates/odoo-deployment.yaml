@@ -84,6 +84,29 @@ spec:
           name: http
         - containerPort: 8071
           name: longpolling
+        # Esta definicion es a nivel del container
+        volumeMounts:
+        - name: odoo-data-volume
+          mountPath: /home/odoo/.local/share
+      
+      # Esta seccion esta fuera de la definicion del container
+      volumes:
+      - name: odoo-data-volume
+        persistentVolumeClaim:
+          claimName: odoo-local-data-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: odoo-local-data-pvc
+spec:
+  # Esta es la línea clave para Rancher Local Path
+  storageClassName: local-path 
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
 ---
 apiVersion: v1
 kind: Service
