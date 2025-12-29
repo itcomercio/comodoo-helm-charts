@@ -3,7 +3,17 @@ entries:
   odoo-helm-chart:
   - apiVersion: v2
     appVersion: 19.0-1
-    created: "2025-12-14T09:59:31.501392395+01:00"
+    created: "2025-12-29T19:32:12.923277568+01:00"
+    description: Odoo Helm chart for Kubernetes
+    digest: c5a3abff4afa79cea0ea17f8dcf6e0886980d4d25d81b4e3480386c40ff30fec
+    name: odoo-helm-chart
+    type: application
+    urls:
+    - odoo-helm-chart-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
+    appVersion: 19.0-1
+    created: "2025-12-29T19:32:12.923040923+01:00"
     description: Odoo Helm chart for Kubernetes
     digest: 49c8a1e76042c517eb167f83b1cc4c8841c8384fa7261530593da905d6206f03
     name: odoo-helm-chart
@@ -13,7 +23,7 @@ entries:
     version: 0.4.0
   - apiVersion: v2
     appVersion: 19.0-1
-    created: "2025-12-14T09:59:31.501188288+01:00"
+    created: "2025-12-29T19:32:12.922811451+01:00"
     description: Odoo Helm chart for Kubernetes
     digest: 967185485aa41a37bf91f9dce440ca762c06671d8638a8bcb72e53addadd46b1
     name: odoo-helm-chart
@@ -23,7 +33,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 19.0-1
-    created: "2025-12-14T09:59:31.500972338+01:00"
+    created: "2025-12-29T19:32:12.922599342+01:00"
     description: Odoo Helm chart for Kubernetes
     digest: 057c1f4af7cdddf4150381da39b6bdc284a474f03fc8bf77c934158439c42e50
     name: odoo-helm-chart
@@ -33,7 +43,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 19.0-1
-    created: "2025-12-14T09:59:31.500750266+01:00"
+    created: "2025-12-29T19:32:12.922392021+01:00"
     description: Odoo Helm chart for Kubernetes
     digest: dc2a50c477888b267833fe901d534dc20f6f2deb942fd2705ad1bf24b0f4d431
     name: odoo-helm-chart
@@ -41,4 +51,4 @@ entries:
     urls:
     - odoo-helm-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2025-12-14T09:59:31.500401572+01:00"
+generated: "2025-12-29T19:32:12.922044864+01:00"

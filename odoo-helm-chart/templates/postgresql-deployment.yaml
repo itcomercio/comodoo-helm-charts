@@ -24,4 +24,4 @@ spec:
     - host all all all md5
   primaryUpdateStrategy: unsupervised
   storage:
-    size: 5Gi
+    size: {{ .Values.odooStorage.dbStorage }}

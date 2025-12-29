@@ -22,3 +22,8 @@ odooInstance:
   
 odooDomainFilter:
   hostname: ""
+
+odooStorage:
+  dbStorage: 5Gi
+  fileStorage: 5Gi
+  addonStorage: 5Gi

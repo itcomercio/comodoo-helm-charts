@@ -88,12 +88,17 @@ spec:
         volumeMounts:
         - name: odoo-data-volume
           mountPath: /home/odoo/.local/share
+        - name: odoo-addons-volume
+          mountPath: /home/odoo/.local/custom_addons
       
       # Esta seccion esta fuera de la definicion del container
       volumes:
       - name: odoo-data-volume
         persistentVolumeClaim:
           claimName: odoo-local-data-pvc
+      - name: odoo-addons-volume
+        persistentVolumeClaim:
+          claimName: odoo-addons-data-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -106,7 +111,20 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: {{ .Values.odooStorage.fileStorage }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: odoo-addons-data-pvc
+spec:
+  # Esta es la línea clave para Rancher Local Path
+  storageClassName: local-path 
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.odooStorage.addonStorage }}
 ---
 apiVersion: v1
 kind: Service
